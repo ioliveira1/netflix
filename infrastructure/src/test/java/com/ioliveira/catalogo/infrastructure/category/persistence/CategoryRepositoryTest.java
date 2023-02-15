@@ -1,7 +1,7 @@
 package com.ioliveira.catalogo.infrastructure.category.persistence;
 
 import com.ioliveira.catalogo.domain.category.Category;
-import com.ioliveira.catalogo.infrastructure.MySQLGatewayTest;
+import com.ioliveira.catalogo.MySQLGatewayTest;
 import org.hibernate.PropertyValueException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

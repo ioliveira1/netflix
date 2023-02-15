@@ -7,7 +7,6 @@ import com.ioliveira.catalogo.domain.category.CategorySearchQuery;
 import com.ioliveira.catalogo.domain.pagination.Pagination;
 import com.ioliveira.catalogo.infrastructure.category.persistence.CategoryJpaEntity;
 import com.ioliveira.catalogo.infrastructure.category.persistence.CategoryRepository;
-import com.ioliveira.catalogo.infrastructure.utils.SpecificationUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -15,6 +14,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+
+import static com.ioliveira.catalogo.infrastructure.utils.SpecificationUtils.like;
 
 @Service
 public class CategoryMySQLGateway implements CategoryGateway {
@@ -64,7 +65,11 @@ public class CategoryMySQLGateway implements CategoryGateway {
 
         final Specification<CategoryJpaEntity> specifications = Optional.ofNullable(query.terms())
                 .filter(str -> !str.isBlank())
-                .map(str -> SpecificationUtils.<CategoryJpaEntity>like(query.sort(), str))
+                .map(str -> {
+                    final Specification<CategoryJpaEntity> nameLike = like("name", str);
+                    final Specification<CategoryJpaEntity> descriptionLike = like("description", str);
+                    return nameLike.or(descriptionLike);
+                })
                 .orElse(null);
 
         final Page<CategoryJpaEntity> pageResult = this.repository.findAll(specifications, page);

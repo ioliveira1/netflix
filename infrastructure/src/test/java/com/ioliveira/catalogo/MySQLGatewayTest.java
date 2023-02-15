@@ -1,4 +1,4 @@
-package com.ioliveira.catalogo.infrastructure;
+package com.ioliveira.catalogo;
 
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
