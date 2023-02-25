@@ -31,10 +31,14 @@ dependencies {
     implementation(project(":application"))
     implementation(project(":domain"))
 
+    implementation('org.springdoc:springdoc-openapi-webmvc-core:1.6.8')
+    implementation('org.springdoc:springdoc-openapi-ui:1.6.8')
+
     implementation('mysql:mysql-connector-java')
     implementation('io.vavr:vavr:0.10.4')
     implementation('org.springframework.boot:spring-boot-starter-data-jpa')
     implementation('org.springframework.boot:spring-boot-starter-undertow')
+    implementation('com.fasterxml.jackson.module:jackson-module-afterburner')
     implementation('org.springframework.boot:spring-boot-starter-web') {
         exclude module: 'spring-boot-starter-tomcat'
     }

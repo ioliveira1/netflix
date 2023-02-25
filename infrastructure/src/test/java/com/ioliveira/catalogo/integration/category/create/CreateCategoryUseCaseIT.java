@@ -43,7 +43,7 @@ public class CreateCategoryUseCaseIT {
         assertNotNull(output);
         assertNotNull(output.id());
 
-        final var categoryDB = categoryRepository.findById(output.id().getValue()).get();
+        final var categoryDB = categoryRepository.findById(output.id()).get();
 
         assertEquals(expectedName, categoryDB.getName());
         assertEquals(expectedDescription, categoryDB.getDescription());

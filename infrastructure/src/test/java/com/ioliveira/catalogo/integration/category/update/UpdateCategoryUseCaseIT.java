@@ -48,9 +48,9 @@ public class UpdateCategoryUseCaseIT {
         final var output = useCase.execute(command).get();
 
         assertNotNull(output);
-        assertEquals(expectedId, output.id());
+        assertEquals(expectedId.getValue(), output.id());
 
-        final CategoryJpaEntity categoryDB = categoryRepository.findById(output.id().getValue()).get();
+        final CategoryJpaEntity categoryDB = categoryRepository.findById(output.id()).get();
 
         assertEquals(expectedName, categoryDB.getName());
         assertEquals(expectedDescription, categoryDB.getDescription());
