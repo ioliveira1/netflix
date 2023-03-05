@@ -2,7 +2,7 @@ package com.ioliveira.catalogo.application.category.retrieve.list;
 
 import com.ioliveira.catalogo.domain.category.Category;
 import com.ioliveira.catalogo.domain.category.CategoryGateway;
-import com.ioliveira.catalogo.domain.category.CategorySearchQuery;
+import com.ioliveira.catalogo.domain.pagination.SearchQuery;
 import com.ioliveira.catalogo.domain.pagination.Pagination;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -42,7 +42,7 @@ public class ListCategoriesUseCaseUnitTest {
         final var expectedDirection = "asc";
 
         final var query =
-                new CategorySearchQuery(expectedPage, expectedPerPage, expectedTerms, expectedSort, expectedDirection);
+                new SearchQuery(expectedPage, expectedPerPage, expectedTerms, expectedSort, expectedDirection);
 
         final var categories = List.of(
                 Category.newCategory("Filmes", null, true),
@@ -75,7 +75,7 @@ public class ListCategoriesUseCaseUnitTest {
         final var expectedDirection = "asc";
 
         final var query =
-                new CategorySearchQuery(expectedPage, expectedPerPage, expectedTerms, expectedSort, expectedDirection);
+                new SearchQuery(expectedPage, expectedPerPage, expectedTerms, expectedSort, expectedDirection);
 
         final var categories = List.<Category>of();
 
@@ -106,7 +106,7 @@ public class ListCategoriesUseCaseUnitTest {
         final var expectedErrorMessage = "Gateway error";
 
         final var query =
-                new CategorySearchQuery(expectedPage, expectedPerPage, expectedTerms, expectedSort, expectedDirection);
+                new SearchQuery(expectedPage, expectedPerPage, expectedTerms, expectedSort, expectedDirection);
 
         when(categoryGateway.findAll(eq(query))).thenThrow(new RuntimeException(expectedErrorMessage));
 

@@ -1,6 +1,6 @@
-package com.ioliveira.catalogo.domain.category;
+package com.ioliveira.catalogo.domain.pagination;
 
-public record CategorySearchQuery(
+public record SearchQuery(
         int page,
         int perPage,
         String terms,

@@ -9,7 +9,7 @@ import com.ioliveira.catalogo.application.category.retrieve.list.ListCategoriesU
 import com.ioliveira.catalogo.application.category.update.UpdateCategoryCommand;
 import com.ioliveira.catalogo.application.category.update.UpdateCategoryOutput;
 import com.ioliveira.catalogo.application.category.update.UpdateCategoryUseCase;
-import com.ioliveira.catalogo.domain.category.CategorySearchQuery;
+import com.ioliveira.catalogo.domain.pagination.SearchQuery;
 import com.ioliveira.catalogo.domain.pagination.Pagination;
 import com.ioliveira.catalogo.domain.validation.handler.Notification;
 import com.ioliveira.catalogo.infrastructure.api.CategoryAPI;
@@ -67,7 +67,7 @@ public class CategoryController implements CategoryAPI {
                                                            final int perPage, final String sort, final String direction) {
 
         return this.listCategoriesUseCase
-                .execute(new CategorySearchQuery(page, perPage, search, sort, direction))
+                .execute(new SearchQuery(page, perPage, search, sort, direction))
                 .map(CategoryListResponse::from);
     }
 

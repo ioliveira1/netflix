@@ -1,7 +1,7 @@
 package com.ioliveira.catalogo.application.category.retrieve.list;
 
 import com.ioliveira.catalogo.domain.category.CategoryGateway;
-import com.ioliveira.catalogo.domain.category.CategorySearchQuery;
+import com.ioliveira.catalogo.domain.pagination.SearchQuery;
 import com.ioliveira.catalogo.domain.pagination.Pagination;
 
 import java.util.Objects;
@@ -15,7 +15,7 @@ public class DefaultListCategoriesUseCase extends ListCategoriesUseCase {
     }
 
     @Override
-    public Pagination<CategoryListOutput> execute(final CategorySearchQuery query) {
+    public Pagination<CategoryListOutput> execute(final SearchQuery query) {
 
         return this.categoryGateway.findAll(query)
                 .map(CategoryListOutput::from);

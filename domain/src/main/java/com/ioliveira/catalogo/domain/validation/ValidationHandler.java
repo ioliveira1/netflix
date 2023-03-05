@@ -8,7 +8,7 @@ public interface ValidationHandler {
 
     ValidationHandler append(ValidationHandler handler);
 
-    ValidationHandler validate(Validation validation);
+    <T> T validate(Validation<T> validation);
 
     default boolean hasErrors() {
         return getErrors() != null && !getErrors().isEmpty();

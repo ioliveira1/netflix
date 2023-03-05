@@ -1,7 +1,9 @@
 package com.ioliveira.catalogo.domain.category;
 
 import com.ioliveira.catalogo.domain.pagination.Pagination;
+import com.ioliveira.catalogo.domain.pagination.SearchQuery;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface CategoryGateway {
@@ -14,5 +16,7 @@ public interface CategoryGateway {
 
     Category update(Category category);
 
-    Pagination<Category> findAll(CategorySearchQuery query);
+    Pagination<Category> findAll(SearchQuery query);
+
+    List<CategoryID> existsByIds(Iterable<CategoryID> ids);
 }

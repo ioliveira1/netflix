@@ -3,8 +3,8 @@ package com.ioliveira.catalogo.infrastructure.category;
 import com.ioliveira.catalogo.domain.category.Category;
 import com.ioliveira.catalogo.domain.category.CategoryGateway;
 import com.ioliveira.catalogo.domain.category.CategoryID;
-import com.ioliveira.catalogo.domain.category.CategorySearchQuery;
 import com.ioliveira.catalogo.domain.pagination.Pagination;
+import com.ioliveira.catalogo.domain.pagination.SearchQuery;
 import com.ioliveira.catalogo.infrastructure.category.persistence.CategoryJpaEntity;
 import com.ioliveira.catalogo.infrastructure.category.persistence.CategoryRepository;
 import org.springframework.data.domain.Page;
@@ -13,6 +13,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import static com.ioliveira.catalogo.infrastructure.utils.SpecificationUtils.like;
@@ -56,7 +58,7 @@ public class CategoryMySQLGateway implements CategoryGateway {
     }
 
     @Override
-    public Pagination<Category> findAll(final CategorySearchQuery query) {
+    public Pagination<Category> findAll(final SearchQuery query) {
         final PageRequest page = PageRequest.of(query.page(),
                 query.perPage(),
                 Sort.Direction.valueOf(query.direction().toUpperCase()),
@@ -79,5 +81,11 @@ public class CategoryMySQLGateway implements CategoryGateway {
                 pageResult.getSize(),
                 pageResult.getTotalElements(),
                 pageResult.map(CategoryJpaEntity::toAggregate).toList());
+    }
+
+    @Override
+    public List<CategoryID> existsByIds(final Iterable<CategoryID> ids) {
+        //TODO: implementar posteriormente
+        return Collections.emptyList();
     }
 }
