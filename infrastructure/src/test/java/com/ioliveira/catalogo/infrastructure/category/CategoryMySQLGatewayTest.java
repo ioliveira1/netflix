@@ -1,10 +1,10 @@
 package com.ioliveira.catalogo.infrastructure.category;
 
+import com.ioliveira.catalogo.MySQLGatewayTest;
 import com.ioliveira.catalogo.domain.category.Category;
 import com.ioliveira.catalogo.domain.category.CategoryGateway;
 import com.ioliveira.catalogo.domain.category.CategoryID;
 import com.ioliveira.catalogo.domain.pagination.SearchQuery;
-import com.ioliveira.catalogo.MySQLGatewayTest;
 import com.ioliveira.catalogo.infrastructure.category.persistence.CategoryJpaEntity;
 import com.ioliveira.catalogo.infrastructure.category.persistence.CategoryRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -317,5 +318,32 @@ public class CategoryMySQLGatewayTest {
         assertEquals(expectedTotal, result.total());
         assertEquals(expectedPerPage, result.items().size());
         assertEquals(series.getId(), result.items().get(0).getId());
+    }
+
+    @Test
+    public void givenPrepersistedCategories_whenCallsExistsByIds_ShouldReturIds() {
+        final var filmes = Category.newCategory("Filmes", null, true);
+        final var series = Category.newCategory("Series", null, true);
+        final var docs = Category.newCategory("Docs", null, true);
+
+        final var ids = List.of(filmes.getId(), series.getId(), CategoryID.from("123"));
+        final var expectedIds = List.of(filmes.getId(), series.getId());
+
+        final var categories = Stream.of(filmes, series, docs)
+                .map(CategoryJpaEntity::from)
+                .toList();
+
+        assertEquals(0, categoryRepository.count());
+
+        categoryRepository.saveAll(categories);
+
+        assertEquals(3, categoryRepository.count());
+
+        final var result = categoryGateway.existsByIds(ids);
+
+        assertTrue(
+                result.size() == 2
+                        && expectedIds.containsAll(result)
+        );
     }
 }

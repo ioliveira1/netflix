@@ -80,7 +80,7 @@ public class GenreJpaEntity {
                 GenreID.from(getId()),
                 getName(),
                 isActive(),
-                getCategoryIDS(),
+                getCategoryIDs(),
                 getCreatedAt(),
                 getUpdatedAt(),
                 getDeletedAt()
@@ -95,7 +95,7 @@ public class GenreJpaEntity {
         this.categories.remove(GenreCategoryJpaEntity.from(this, id));
     }
 
-    public List<CategoryID> getCategoryIDS() {
+    public List<CategoryID> getCategoryIDs() {
         return getCategories()
                 .stream()
                 .map(it -> CategoryID.from(it.getId().getCategoryId()))

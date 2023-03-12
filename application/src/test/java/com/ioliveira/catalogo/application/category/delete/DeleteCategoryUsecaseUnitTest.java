@@ -2,7 +2,6 @@ package com.ioliveira.catalogo.application.category.delete;
 
 import com.ioliveira.catalogo.domain.category.Category;
 import com.ioliveira.catalogo.domain.category.CategoryGateway;
-import com.ioliveira.catalogo.domain.category.CategoryID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
